@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI | Countdown</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ display:flex;align-items:center;justify-content:center;
+ text-align:center;color:white;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(145deg,#090b25,#30104d,#a32972,#071b38);
+ background-size:300% 300%;
+ animation:bg 12s ease infinite;
+ padding:20px;
+}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.container{width:100%;max-width:850px}
+.tag{letter-spacing:7px;color:#ffb4e4;font-size:13px}
+h1{font-size:clamp(42px,10vw,90px);margin:20px 0;text-shadow:0 0 25px #ff35ba}
+h2{font-size:clamp(17px,4vw,25px);letter-spacing:4px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:40px 0}
+.unit{background:#090b27bb;border:1px solid #ff65d4;border-radius:14px;padding:22px 5px;box-shadow:0 0 20px #e52bb555}
+.number{font-size:clamp(30px,7vw,65px);font-weight:bold;color:#fff}
+.caption{font-size:12px;letter-spacing:3px;color:#ffb4e4;margin-top:8px}
+.date{letter-spacing:3px;color:#fff;margin-top:25px}
+footer{font-size:12px;color:#e5c9ed;margin-top:45px}
+@media(max-width:480px){.timer{gap:6px}.unit{padding:15px 2px}.caption{font-size:9px;letter-spacing:1px}}
+</style>
+</head>
+<body>
+<div class="container">
+ <div class="tag">WELCOME TO LEONIDA</div>
+ <h1>GRAND THEFT AUTO VI</h1>
+ <h2>THE COUNTDOWN HAS BEGUN</h2>
+ <div class="timer">
+  <div class="unit"><div class="number" id="days">00</div><div class="caption">JOURS</div></div>
+  <div class="unit"><div class="number" id="hours">00</div><div class="caption">HEURES</div></div>
+  <div class="unit"><div class="number" id="minutes">00</div><div class="caption">MINUTES</div></div>
+  <div class="unit"><div class="number" id="seconds">00</div><div class="caption">SECONDES</div></div>
+ </div>
+ <div class="date">19 NOVEMBRE 2026 • VICE CITY</div>
+ <footer>UNOFFICIAL FAN COUNTDOWN • NOT AFFILIATED WITH ROCKSTAR GAMES</footer>
+</div>
+<script>
+const target = new Date("2026-11-19T00:00:00+01:00").getTime();
+function update(){
+ let remaining = Math.max(0,target-Date.now());
+ const days=Math.floor(remaining/86400000);
+ const hours=Math.floor(remaining%86400000/3600000);
+ const minutes=Math.floor(remaining%3600000/60000);
+ const seconds=Math.floor(remaining%60000/1000);
+ document.getElementById("days").textContent=String(days).padStart(2,"0");
+ document.getElementById("hours").textContent=String(hours).padStart(2,"0");
+ document.getElementById("minutes").textContent=String(minutes).padStart(2,"0");
+ document.getElementById("seconds").textContent=String(seconds).padStart(2,"0");
+ if(remaining===0) document.querySelector("h2").textContent="GTA VI IS HERE!";
+}
+update();setInterval(update,1000);
+</script>
+</body>
+</html>
